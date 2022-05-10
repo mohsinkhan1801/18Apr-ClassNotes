@@ -1,0 +1,57 @@
+ 518  kubectl get pv
+kubectl create -f https://raw.githubusercontent.com/Sonal0409/DevOps_ClassNotes/master/Kubernetese/PersistentVolume/pv.yml
+  520  kubectl get pv
+
+  524  kubectl get pvc
+  525  kubectl get pv
+
+  527  kubectl get pv -o yaml | less
+  
+  529  kubectl get pv
+  530  kubectl get pvc
+  
+  531  kubectl create -f https://raw.githubusercontent.com/Sonal0409/DevOps_ClassNotes/master/Kubernetese/PersistentVolume/pod-pvc.yml
+
+  533  kubectl get pods
+  534  kubectl describe pod pod-pvc | less
+  535  kubectl get pods -o wide
+  536  clear
+  537  kubectl get pods
+  539  kubectl exec -it pod-pvc -- bash
+  # cd data
+  # touch file1 file2
+  
+  data will be preserved on the slave wehre the pod is created.
+  
+   546  kubectl get namespace
+  547  kubectl create namespace sonal
+  548  kubectl get namespace
+  555  kubectl run pod1 --image nginx -n sonal
+  557  kubectl get pods -n sonal
+  559  kubectl delete pod pod1 -n sonal
+
+
+
+
+
+
+
+
+Extra:
+
+Multi-Container POD:
+
+$ nano sample.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-container
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.10-alpine
+    ports:
+    - containerPort: 80
+  - name: alpine
+    image: alpine:3.5
+    command: ["watch", "wget", "-qO-", "localhost"]
